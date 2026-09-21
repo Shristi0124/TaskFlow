@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: taskflow
+      MYSQL_USER: taskflow_user
+      MYSQL_PASSWORD: taskflow_pass
+      MYSQL_ROOT_PASSWORD: root_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: mysql+pymysql://taskflow_user:taskflow_pass@mysql:3306/taskflow
+      SECRET_KEY: dev-secret-change-me
+      FRONTEND_ORIGIN: http://localhost:3000
+    ports:
+      - "8000:8000"
+
+volumes:
+  mysql_data:
