@@ -1,7 +1,6 @@
 # TaskFlow
 
-An internal project and task management tool. Users can register, log in, create projects, create and assign tasks within those projects, track task status, search and filter tasks, and see a dashboard of overall progress.
-
+An internal project and task management tool. Users can register, log in, create projects, create and assign tasks within those projects, track task status, search and filter tasks, and see a dashboard of overall progress. 
 Built as a technical evaluation assignment for the Full Stack Developer Intern role.
 
 ## Project Overview
@@ -206,3 +205,7 @@ Password: Test@123
 ```
 
 Otherwise, just register a new account through the UI — registration is open.
+
+
+
+Root@12345
